@@ -69,6 +69,19 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
+    <script>
+        function nWin() {
+            var w = window.open();
+            var html = $("#toNewWindow").html();
+            $(w.document.body).html(html);
+            setTimeout(function () { w.print() }, 1500);
+        }
+
+        $(function () {
+            $("a#print").click(nWin);
+        });
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -10,4 +10,8 @@
     <PackageReference Include="ZXing.Net" Version="0.16.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StockManagement.Data\StockManagement.Data.csproj" />
+  </ItemGroup>
+
 </Project>

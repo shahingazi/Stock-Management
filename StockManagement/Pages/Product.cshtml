@@ -1,0 +1,66 @@
+﻿@page
+@model StockManagement.Pages.ProductModel
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    input[type='submit'], button, [aria-label] {
+        cursor: pointer;
+    }
+
+    #spoiler {
+        display: none;
+    }
+
+    table {
+        font-family: Arial, sans-serif;
+        border: 1px solid;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #0066CC;
+        color: white;
+    }
+
+    td {
+        border: 1px solid;
+        padding: 5px;
+    }
+</style>
+
+<h2>Products</h2>
+
+
+<h3>Add a Product</h3>
+<form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+    <input type="text" id="name" placeholder="type product name">
+    <input type="text" id="barcode" placeholder="type barcode">
+    <input type="text" id="quantity" placeholder="type product quantity">
+    <input type="submit" value="Add">
+</form>
+
+<div id="spoiler">
+    <h3>Edit</h3>
+    <form class="my-form">
+        <input type="hidden" id="edit-id">       
+        <input type="text" id="edit-name">
+        <input type="submit" value="Edit">
+        <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+    </form>
+</div>
+
+<p id="counter"></p>
+
+<table>
+    <tr>
+     
+        <th>Name</th>
+        <th>BarCode</th>
+        <th> Quantity</th>
+    </tr>
+    <tbody id="todos"></tbody>
+</table>

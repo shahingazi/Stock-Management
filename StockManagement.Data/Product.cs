@@ -12,7 +12,7 @@ namespace StockManagement.Data
         public string BarCode { get; set; }
         public int Quantity { get; set; }
         [Required]
-        public DateTime CratedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
         [Required]
         public string CreatedBy { get; set; }
     }

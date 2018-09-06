@@ -26,7 +26,7 @@ namespace StockManagement.API
         }
 
         // GET: api/Transaction/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public ActionResult<Transaction> Get(int id)
         {
             var product = _context.Transactions.Find(id);

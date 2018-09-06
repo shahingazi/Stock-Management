@@ -26,7 +26,7 @@ namespace StockManagement.API
         }
 
         // GET: api/Product/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
             var product = _context.Products.Find(id);
@@ -42,7 +42,7 @@ namespace StockManagement.API
         [HttpPost]
         public void Post([FromBody] Product product)
         {
-            product.CratedAt = DateTime.Now;
+            product.CreatedAt = DateTime.Now;
             product.CreatedBy = "shahin";
             _context.Products.Add(product);
             _context.SaveChanges();

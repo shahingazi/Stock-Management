@@ -10,5 +10,6 @@ namespace StockManagement.Data
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

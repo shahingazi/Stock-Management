@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using StockManagement.Data;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StockManagement.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly StockManagementContext _context;

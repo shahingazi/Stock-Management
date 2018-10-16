@@ -37,7 +37,7 @@ namespace StockManagement.API
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
-            var user = _userService.Authenticate(userDto.Username, userDto.Password);
+            var user = _userService.Authenticate(userDto.Email, userDto.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
@@ -60,7 +60,7 @@ namespace StockManagement.API
             return Ok(new
             {
                 user.Id,
-                user.Username,
+                user.Email,
                 user.FirstName,
                 user.LastName,
                 Token = tokenString

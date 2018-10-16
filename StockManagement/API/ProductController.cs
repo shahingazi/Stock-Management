@@ -9,7 +9,7 @@ namespace StockManagement.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class ProductController : ControllerBase
     {
         private readonly StockManagementContext _context;

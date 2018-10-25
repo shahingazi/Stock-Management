@@ -35,7 +35,7 @@ namespace StockManagement.API
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody]Credentials userDto)
         {
             var user = _userService.Authenticate(userDto.Email, userDto.Password);
 
@@ -69,7 +69,7 @@ namespace StockManagement.API
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserDto userDto)
+        public IActionResult Register([FromBody]Credentials userDto)
         {
             // map dto to entity
             var user = _mapper.Map<User>(userDto);
@@ -91,7 +91,7 @@ namespace StockManagement.API
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
-            var userDtos = _mapper.Map<IList<UserDto>>(users);
+            var userDtos = _mapper.Map<IList<Credentials>>(users);
             return Ok(userDtos);
         }
 
@@ -99,12 +99,12 @@ namespace StockManagement.API
         public IActionResult GetById(int id)
         {
             var user = _userService.GetById(id);
-            var userDto = _mapper.Map<UserDto>(user);
+            var userDto = _mapper.Map<Credentials>(user);
             return Ok(userDto);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        public IActionResult Update(int id, [FromBody]Credentials userDto)
         {
             // map dto to entity and set id
             var user = _mapper.Map<User>(userDto);

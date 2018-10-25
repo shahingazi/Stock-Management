@@ -9,7 +9,7 @@ namespace StockManagement.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class ProductController : ControllerBase
     {
         private readonly StockManagementContext _context;
@@ -24,6 +24,9 @@ namespace StockManagement.API
         public IEnumerable<Product> Get()
         {
             var result = _context.Products.OrderByDescending(x => x.Id);
+
+            Request.HttpContext.Response.Headers["X-Total-Count"] = "30";
+            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;
         }
 

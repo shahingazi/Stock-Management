@@ -80,6 +80,7 @@ namespace StockManagement
                 };
             });
 
+            services.AddCors();
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
 

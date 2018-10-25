@@ -8,8 +8,8 @@ namespace StockManagement.Helper
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
+            CreateMap<User, Credentials>();
+            CreateMap<Credentials, User>();
         }
     }
 }

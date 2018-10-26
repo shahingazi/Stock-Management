@@ -92,6 +92,8 @@ namespace StockManagement.API
         {
             var users = _userService.GetAll();
             var userDtos = _mapper.Map<IList<Credentials>>(users);
+            Request.HttpContext.Response.Headers["X-Total-Count"] = userDtos?.Count.ToString();
+            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return Ok(userDtos);
         }
 

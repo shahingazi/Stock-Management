@@ -24,8 +24,7 @@ namespace StockManagement.API
         public IEnumerable<Product> Get()
         {
             var result = _context.Products.OrderByDescending(x => x.Id);
-
-            Request.HttpContext.Response.Headers["X-Total-Count"] = "30";
+            Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
             Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;
         }
@@ -45,12 +44,14 @@ namespace StockManagement.API
 
         // POST: api/Product
         [HttpPost]
-        public void Post([FromBody] Product product)
+        public ActionResult<Product> Post([FromBody] Product product)
         {
             product.CreatedAt = DateTime.Now;
             product.CreatedBy = "shahin";
             _context.Products.Add(product);
             _context.SaveChanges();
+            return product;
+
         }
 
         // PUT: api/Product/5

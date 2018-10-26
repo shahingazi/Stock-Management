@@ -22,6 +22,8 @@ namespace StockManagement.API
         public IEnumerable<Transaction> Get()
         {
             var result = _context.Transactions.OrderByDescending(x => x.Id);
+            Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
+            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;
         }
 

@@ -3,10 +3,10 @@
  
  ##How to run it
  
--npm install -g create-react-app
--Clone git url or download source code
--npm install
--npm start
+- npm install -g create-react-app
+- Clone git url or download source code
+- npm install
+- npm start
 
 
 

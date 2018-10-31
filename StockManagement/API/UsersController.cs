@@ -67,9 +67,9 @@ namespace StockManagement.API
             });
         }
 
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public IActionResult Register([FromBody]Credentials userDto)
+        
+        [HttpPost]
+        public IActionResult Post([FromBody]Credentials userDto)
         {
             // map dto to entity
             var user = _mapper.Map<User>(userDto);
@@ -106,7 +106,7 @@ namespace StockManagement.API
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]Credentials userDto)
+        public IActionResult Put(int id, [FromBody]Credentials userDto)
         {
             // map dto to entity and set id
             var user = _mapper.Map<User>(userDto);

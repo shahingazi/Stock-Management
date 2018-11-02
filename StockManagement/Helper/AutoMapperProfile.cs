@@ -8,8 +8,9 @@ namespace StockManagement.Helper
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, Credentials>();
-            CreateMap<Credentials, User>();
+            CreateMap<User, Credentials>().ForMember(x=>x.Username, opt=> opt.MapFrom(x=>x.Email));           
+            CreateMap<Credentials, User>().ForMember(x=>x.Email, opt=>opt.MapFrom(x=>x.Username));
+            
         }
     }
 }

@@ -37,7 +37,7 @@ namespace StockManagement.API
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]Credentials userDto)
         {
-            var user = _userService.Authenticate(userDto.Email, userDto.Password);
+            var user = _userService.Authenticate(userDto.Username, userDto.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
@@ -88,6 +88,7 @@ namespace StockManagement.API
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
@@ -98,6 +99,7 @@ namespace StockManagement.API
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult GetById(int id)
         {
             var user = _userService.GetById(id);
@@ -126,6 +128,7 @@ namespace StockManagement.API
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _userService.Delete(id);

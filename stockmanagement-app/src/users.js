@@ -7,7 +7,7 @@ export const UsersList = (props) => (
             <TextField source="id" />
             <TextField source="firstName" />
             <TextField source="lastName" />
-            <EmailField source="email" />
+            <EmailField source="username" />
             <EditButton />
         </Datagrid>
     </List>
@@ -20,7 +20,7 @@ export const UserEdit = props => (
             <TextInput source="id" />
             <TextInput source="firstName" />
             <TextInput source="lastName" />
-            <TextInput source="email" />
+            <TextInput source="username" />
             <TextInput source="password" type="password" />
         </SimpleForm>
     </Edit>
@@ -32,7 +32,7 @@ export const UserCreate = props => (
         <SimpleForm>
         <TextInput source="firstName" />
             <TextInput source="lastName" />
-            <TextInput source="email" />
+            <TextInput source="username" />
             <TextInput source="password" type="password" />
         </SimpleForm>
     </Create>

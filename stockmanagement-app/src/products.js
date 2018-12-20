@@ -33,6 +33,8 @@ export const ProductCreate = props => (
             <TextInput source="name" />
             <TextInput source="barCode" />
             <NumberInput source="quantity" />
+            <NumberInput source="companyId" />
+            <NumberInput source="productCode" />
             <DateInput source="createdAt" />
             <TextInput source="createdBy" />
         </SimpleForm>

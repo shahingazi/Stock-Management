@@ -88,7 +88,7 @@ namespace StockManagement.API
         }
 
         [HttpGet]
-        [Authorize]
+        
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();

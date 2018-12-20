@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockManagement.Data
 {
@@ -9,11 +10,11 @@ namespace StockManagement.Data
         [Required]
         public string Name { get; set; }
         [Required]
-        public string BarCode { get; set; }
-        public int Quantity { get; set; }
-        [Required]
         public DateTime CreatedAt { get; set; }
         [Required]
         public string CreatedBy { get; set; }
+        public int CompanyId { get; set; }        
+        [ForeignKey("CompanyId")]
+        public Company Company { get; set; }
     }
 }

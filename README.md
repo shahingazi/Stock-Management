@@ -6,8 +6,8 @@
 4.	Create / Manage User (Company owner)
 5.	Create product for a company (Owner, Member)
 6.	Create Transaction
-  a.	Entry (member) – Create Barcode(system)
-  b.	Out (member)-
-7.	Daily / weekly / Monthly report
+  a.	Buy Product (member), Barcode Genarator(system)
+  b.	Sell Product (member)
+7. Daily / weekly / Monthly report
 8. Change Password
 9. Logout user

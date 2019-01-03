@@ -1,4 +1,4 @@
-# Stock-Management
+# Simple Stock Management App
 
 1.	Create user public or private
 2.	Login user

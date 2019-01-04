@@ -42,12 +42,62 @@ namespace StockManagement.API
 
         // POST: api/Transaction
         [HttpPost]
-        public void Post([FromBody] Transaction transaction)
+        public IActionResult Post([FromBody] Transaction transaction)
         {
-            transaction.CreatedAt = DateTime.Now;
-            transaction.CreatedBy = "shahin";
-            _context.Transactions.Add(transaction);
-            _context.SaveChanges();
+            //todo - refactor whole process
+
+            try
+            {
+                //get balance
+                var balance = _context.Balances.FirstOrDefault(x => x.ProductId == transaction.ProductId);
+
+                if (transaction.Type == TransactionType.SELL && balance.StockQuantity < transaction.Quantity)
+                {
+                    throw new Exception("This quantity is not available");
+                }
+
+                transaction.CreatedAt = DateTime.Now;
+                transaction.CreatedBy = "shahin";
+                _context.Transactions.Add(transaction);
+
+                if (balance == null)
+                {
+                    _context.Add(new Balance
+                    {
+                        ProductId = transaction.ProductId,
+                        StockQuantity = transaction.Quantity,
+                        TotalQuantity = transaction.Quantity,
+                        PurchaseAmount = transaction.Amount,
+                    });
+
+                }
+                else
+                {
+                    if (transaction.Type == TransactionType.BUY)
+                    {
+                        balance.StockQuantity += transaction.Quantity;
+                        balance.TotalQuantity += transaction.Quantity;
+                        balance.PurchaseAmount += transaction.Amount;
+
+                    }
+                    else
+                    {
+                        balance.StockQuantity -= transaction.Quantity;
+                        balance.SellingAmount += transaction.Amount;
+                    }
+                    _context.Update(balance);
+                }
+
+                _context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.StackTrace);
+            }
+
+            return Ok(transaction);
+
         }
 
         // PUT: api/Transaction/5

@@ -1,13 +1,14 @@
 import React from 'react';
-import { List, Datagrid, TextField ,EditButton,Edit,SimpleForm,DisabledInput,Create, TextInput,DateInput,NumberInput } from 'react-admin';
+import { List, Datagrid,ReferenceField, TextField ,EditButton,Edit,SimpleForm,SelectInput,Create, TextInput,DateInput,NumberInput,ReferenceInput  } from 'react-admin';
 
 
 export const ProductList = (props) => (
     <List {...props}>
         <Datagrid>           
             <TextField source="name" />
-            <TextField source="barCode" />
-            <TextField source="quantity" />
+            <ReferenceField label="Company" source="companyId" reference="company">
+                <TextField source="name" />
+            </ReferenceField>
             <EditButton />
         </Datagrid>
     </List>
@@ -17,12 +18,12 @@ export const ProductList = (props) => (
 export const ProductEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <DisabledInput source="id" />
+            <TextField source="id" />
             <TextInput source="name" />
-            <TextInput source="barCode" />
-            <NumberInput source="quantity" />
-            <DateInput source="createdAt" />
-            <TextInput source="createdBy" />
+            <ReferenceInput label="Company" source="companyId" reference="company">
+                <SelectInput optionText="name" />
+            </ReferenceInput> 
+         
         </SimpleForm>
     </Edit>
 );
@@ -30,11 +31,10 @@ export const ProductEdit = props => (
 export const ProductCreate = props => (
     <Create {...props}>
         <SimpleForm>        
-            <TextInput source="name" />
-            <TextInput source="barCode" />
-            <NumberInput source="quantity" />
-            <NumberInput source="companyId" />
-            <NumberInput source="productCode" />
+            <TextInput source="name" />            
+            <ReferenceInput label="Company" source="companyId" reference="company">
+                <SelectInput optionText="name" />
+            </ReferenceInput>  
             <DateInput source="createdAt" />
             <TextInput source="createdBy" />
         </SimpleForm>

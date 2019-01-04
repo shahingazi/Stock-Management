@@ -9,6 +9,7 @@ namespace StockManagement.Data
         public int Id { get; set; }
         public TransactionType Type { get; set; }
         public int Quantity { get; set; }
+        public int Amount { get; set; }
         [Required]
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }

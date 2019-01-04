@@ -15,6 +15,7 @@ namespace StockManagement.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<Barcode> Barcodes { get; set; }
         public DbSet<UserAccessRight> UserAccessRights { get; set; }
+        public DbSet<Balance> Balances { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

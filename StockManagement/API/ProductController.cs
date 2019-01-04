@@ -65,6 +65,7 @@ namespace StockManagement.API
             }
 
             product.Name = formValue.Name;
+            product.CompanyId = formValue.CompanyId;
             _context.Products.Update(product);
             _context.SaveChanges();
             return NoContent();

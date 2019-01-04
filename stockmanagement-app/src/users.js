@@ -17,10 +17,10 @@ export const UsersList = (props) => (
 export const UserEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="id" />
+            <TextField source="id" />
             <TextInput source="firstName" />
             <TextInput source="lastName" />
-            <TextInput source="username" />
+            <TextField source="username" />
             <TextInput source="password" type="password" />
         </SimpleForm>
     </Edit>

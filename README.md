@@ -11,3 +11,6 @@
 7. Daily / weekly / Monthly report (Owner)
 8. Change Password (Member/ Owner)
 9. Logout user
+
+# Implemented by
+ASP.NET CORE API, React JS

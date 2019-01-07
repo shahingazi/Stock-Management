@@ -8,7 +8,7 @@ const choices = [
  ];
 
 export const TransactionList = (props) => (
-    <List title="All companies" {...props}>
+    <List title="All Transactions" {...props}>
         <Datagrid rowClick="edit">
             
             <ReferenceField label="Product" source="productId" reference="product">
@@ -17,6 +17,7 @@ export const TransactionList = (props) => (
             <SelectField  source="type" choices={choices} translateChoice={false}/>
             <TextField source="quantity" /> 
             <TextField source="amount" /> 
+            <TextField source="createdAt" /> 
            
         </Datagrid>
     </List>

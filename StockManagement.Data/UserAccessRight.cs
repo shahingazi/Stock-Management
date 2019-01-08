@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockManagement.Data
 {
@@ -11,6 +12,10 @@ namespace StockManagement.Data
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
         public bool DefaultCompany { get; set; }
+        [ForeignKey("CompanyId")]
+        public Company Company { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 
     public enum AccessRight

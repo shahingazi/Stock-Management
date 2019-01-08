@@ -88,7 +88,7 @@ namespace StockManagement.API
         }
 
         [HttpGet]
-        
+        [Authorize]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
@@ -108,6 +108,7 @@ namespace StockManagement.API
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody]Credentials userDto)
         {
             // map dto to entity and set id

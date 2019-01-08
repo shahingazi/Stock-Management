@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockManagement.Data;
 
@@ -7,22 +9,25 @@ namespace StockManagement.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    [Authorize]
+    public class CompanyController : BaseController
     {
         private readonly StockManagementContext _context;
+       
 
         public CompanyController(StockManagementContext context)
         {
             _context = context;
+           
         }
 
         // GET: api/Company
         [HttpGet]
         public IEnumerable<Company> Get()
-        {
+        {          
             var result = _context.Companies;
             Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
-            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
+            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";            
             return result;
         }
 
@@ -46,6 +51,17 @@ namespace StockManagement.API
         {
             _context.Companies.Add(company);
             _context.SaveChanges();
+            var accessright = new UserAccessRight
+            {
+                CompanyId = company.Id,
+                DefaultCompany = true,
+                IsActive = true,
+                Role = AccessRight.Admin,
+                UserId = CurrentUserId,
+                CreatedAt = DateTime.Now
+            };
+            _context.Add(accessright);
+            _context.SaveChanges();            
             return company;
         }
 

@@ -176,6 +176,10 @@ namespace StockManagement.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("UserAccessRights");
                 });
 
@@ -208,6 +212,19 @@ namespace StockManagement.Data.Migrations
                     b.HasOne("StockManagement.Data.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StockManagement.Data.UserAccessRight", b =>
+                {
+                    b.HasOne("StockManagement.Data.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StockManagement.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

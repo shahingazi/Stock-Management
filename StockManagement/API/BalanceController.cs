@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockManagement.Data;
 
@@ -7,6 +8,7 @@ namespace StockManagement.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BalanceController : ControllerBase
     {
         private readonly StockManagementContext _context;

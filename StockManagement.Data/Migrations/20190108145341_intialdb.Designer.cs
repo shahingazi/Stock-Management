@@ -10,8 +10,8 @@ using StockManagement.Data;
 namespace StockManagement.Data.Migrations
 {
     [DbContext(typeof(StockManagementContext))]
-    [Migration("20190104123614_addingBalancesTable")]
-    partial class addingBalancesTable
+    [Migration("20190108145341_intialdb")]
+    partial class intialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,6 +113,8 @@ namespace StockManagement.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Amount");
+
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("CreatedBy")
@@ -176,6 +178,10 @@ namespace StockManagement.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("UserAccessRights");
                 });
 
@@ -208,6 +214,19 @@ namespace StockManagement.Data.Migrations
                     b.HasOne("StockManagement.Data.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StockManagement.Data.UserAccessRight", b =>
+                {
+                    b.HasOne("StockManagement.Data.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StockManagement.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

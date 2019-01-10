@@ -5,8 +5,10 @@ import { ProductList ,ProductEdit,ProductCreate } from './products';
 import { UsersList, UserEdit, UserCreate } from './users';
 import { CompanyList, CompanyEdit, CompanyCreate } from './company';
 import { TransactionList, TransactionEdit, TransactionCreate } from './transaction';
+import { UserAccessList} from './userpermission';
 import { BalanceList} from './balance';
 import UserIcon from '@material-ui/icons/Group';
+import AccessRight from '@material-ui/icons/Settings';
 import Store from '@material-ui/icons/Store';
 import Business from '@material-ui/icons/Business';
 import AccountBalanceWallet from '@material-ui/icons/AccountBalance';
@@ -32,6 +34,7 @@ const App = () => (
       <Resource name="company" list={CompanyList}  edit={CompanyEdit} create={CompanyCreate}  icon={Business}  /> 
       <Resource name="transaction" list={TransactionList}  edit={TransactionEdit} create={TransactionCreate}  icon={ShoppingBasket}  />        
       <Resource name="balance" list={BalanceList}  icon={AccountBalanceWallet} />  
+      <Resource name="UserAccess" list={UserAccessList}  icon={AccessRight} />  
   </Admin>
 );
 

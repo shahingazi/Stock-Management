@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StockManagement.Data;
 
 namespace StockManagement.API
@@ -13,21 +14,23 @@ namespace StockManagement.API
     public class CompanyController : BaseController
     {
         private readonly StockManagementContext _context;
-       
 
-        public CompanyController(StockManagementContext context)
+        public CompanyController(StockManagementContext context) : base(context)
         {
             _context = context;
-           
         }
 
         // GET: api/Company
         [HttpGet]
         public IEnumerable<Company> Get()
-        {          
-            var result = _context.Companies;
+        {
+            var result = _context.Companies
+                .Where(x => GetMyAccessRights()
+                    .Select(z => z.CompanyId)
+                    .Contains(x.Id));
+
             Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
-            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";            
+            Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;
         }
 
@@ -61,7 +64,7 @@ namespace StockManagement.API
                 CreatedAt = DateTime.Now
             };
             _context.Add(accessright);
-            _context.SaveChanges();            
+            _context.SaveChanges();
             return company;
         }
 

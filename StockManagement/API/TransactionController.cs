@@ -10,11 +10,11 @@ namespace StockManagement.API
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class TransactionController : ControllerBase
+    public class TransactionController : BaseController
     {
         private readonly StockManagementContext _context;
 
-        public TransactionController(StockManagementContext context)
+        public TransactionController(StockManagementContext context) : base(context)
         {
             _context = context;
         }
@@ -23,7 +23,9 @@ namespace StockManagement.API
         [HttpGet]
         public IEnumerable<Transaction> Get()
         {
-            var result = _context.Transactions.OrderByDescending(x => x.Id);
+            var result = _context.Transactions
+                .Where(x => GetMyAccessRights().Select(z => z.CompanyId)
+                    .Contains(x.Product.CompanyId)).OrderByDescending(x => x.Id);
             Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
             Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;
@@ -33,6 +35,7 @@ namespace StockManagement.API
         [HttpGet("{id}")]
         public ActionResult<Transaction> Get(int id)
         {
+            //todo access right
             var product = _context.Transactions.Find(id);
             if (product == null)
             {
@@ -107,6 +110,7 @@ namespace StockManagement.API
         public IActionResult Put(int id, [FromBody] Transaction formValue)
         {
             var transaction = _context.Transactions.Find(id);
+
             if (transaction == null)
             {
                 return NotFound();

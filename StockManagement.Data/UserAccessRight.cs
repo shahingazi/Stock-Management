@@ -15,7 +15,8 @@ namespace StockManagement.Data
         [ForeignKey("CompanyId")]
         public Company Company { get; set; }
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User User { get; set; }       
+
     }
 
     public enum AccessRight

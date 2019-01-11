@@ -10,6 +10,7 @@ using StockManagement.Service;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -17,16 +18,17 @@ namespace StockManagement.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController
     {
         private IUserService _userService;
         private readonly AppSettings _appSettings;
         private IMapper _mapper;
+        private readonly StockManagementContext _context;
 
         public UsersController(
             IUserService userService,
              IMapper mapper,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings, StockManagementContext context):base(context)
         {
             _userService = userService;
             _mapper = mapper;
@@ -73,6 +75,7 @@ namespace StockManagement.API
         {
             // map dto to entity
             var user = _mapper.Map<User>(userDto);
+            user.InviteeId = CurrentUserId;
 
             try
             {
@@ -91,7 +94,10 @@ namespace StockManagement.API
         [Authorize]
         public IActionResult GetAll()
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAll()
+                .Where(x=> x.InviteeId == CurrentUserId 
+                || x.Id ==CurrentUserId);
+
             var userDtos = _mapper.Map<IList<Credentials>>(users);
             Request.HttpContext.Response.Headers["X-Total-Count"] = userDtos?.Count.ToString();
             Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
@@ -102,6 +108,7 @@ namespace StockManagement.API
         [Authorize]
         public IActionResult GetById(int id)
         {
+            //TODO : ACCESS RIGHT
             var user = _userService.GetById(id);
             var userDto = _mapper.Map<Credentials>(user);
             return Ok(userDto);
@@ -111,6 +118,7 @@ namespace StockManagement.API
         [Authorize]
         public IActionResult Put(int id, [FromBody]Credentials userDto)
         {
+            //TODO : ACCESS RIGHT
             // map dto to entity and set id
             var user = _mapper.Map<User>(userDto);
             user.Id = id;
@@ -132,6 +140,7 @@ namespace StockManagement.API
         [Authorize]
         public IActionResult Delete(int id)
         {
+            //TODO : ACCESS RIGHT
             _userService.Delete(id);
             return Ok();
         }

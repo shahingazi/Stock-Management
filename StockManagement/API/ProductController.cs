@@ -10,11 +10,11 @@ namespace StockManagement.API
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private readonly StockManagementContext _context;
 
-        public ProductController(StockManagementContext context)
+        public ProductController(StockManagementContext context): base(context)
         {
             _context = context;
         }
@@ -23,7 +23,8 @@ namespace StockManagement.API
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            var result = _context.Products.OrderByDescending(x => x.Id);
+            var result = _context.Products.Where(x => GetMyAccessRights().Select(z => z.CompanyId)
+                    .Contains(x.CompanyId)).OrderByDescending(x => x.Id);
             Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
             Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;

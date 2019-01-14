@@ -20,10 +20,16 @@ namespace StockManagement.API
 
         // GET: api/Transaction
         [HttpGet]
-        public IEnumerable<Balance> Get()
+        public IEnumerable<Balance> Get(int ? companyId)
         {
+            if (companyId == null)
+            {
+                companyId = GetMyAccessRights().FirstOrDefault(x => x.DefaultCompany).CompanyId;
+            }
+
             var result = _context.Balances.Where(x => GetMyAccessRights().Select(z => z.CompanyId)
-                    .Contains(x.Product.CompanyId));
+                    .Contains(x.Product.CompanyId) && x.Product.CompanyId == companyId);
+
             Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
             Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;

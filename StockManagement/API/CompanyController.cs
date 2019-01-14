@@ -52,6 +52,7 @@ namespace StockManagement.API
         [HttpPost]
         public ActionResult<Company> Post([FromBody] Company company)
         {
+            company.CreatedAt = DateTime.Now;            
             _context.Companies.Add(company);
             _context.SaveChanges();
             var accessright = new UserAccessRight

@@ -1,34 +1,30 @@
 import React from 'react';
-import { List, Datagrid, TextField,EditButton,Edit,SimpleForm,Create,DateInput,TextInput } from 'react-admin';
+import { List,DateField, Datagrid, TextField,EditButton,Edit,SimpleForm,Create,DateInput,TextInput } from 'react-admin';
 
 export const CompanyList = (props) => (
     <List title="All companies" {...props}>
         <Datagrid rowClick="edit">
             <TextField source="id" />
-            <TextField source="name" />
-            <TextField source="createdAt" />  
+            <TextField source="name" />           
             <EditButton />
         </Datagrid>
     </List>
 );
-
 
 export const CompanyEdit = props => (
     <Edit {...props}>
         <SimpleForm>
         <TextField source="id" />
             <TextInput source="name" />
-            <DateInput source="createdAt" />
+            
         </SimpleForm>
     </Edit>
 );
 
-
 export const CompanyCreate = props => (
-    <Create {...props}>
+    <Create {...props} redirect="show">
         <SimpleForm  >
-         <TextInput source="name" />
-         <DateInput source="createdAt" />
+         <TextInput source="name" />        
         </SimpleForm>
     </Create>
 );

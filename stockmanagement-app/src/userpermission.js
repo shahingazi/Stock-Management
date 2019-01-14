@@ -7,16 +7,14 @@ const choices = [
  ];
 
 export const UserAccessList = (props) => (
-    <List {...props}>
+    <List {...props} >
         <Datagrid>           
             <ReferenceField label="UserName" source="userId" reference="users">
                 <TextField source="username" />
             </ReferenceField>
-
             <ReferenceField label="Company" source="companyId" reference="company">
                 <TextField source="name" />
             </ReferenceField>
-
             <SelectField  source="role" choices={choices} translateChoice={false}/>
             <BooleanField   source="isActive" />
             <BooleanField   source="defaultCompany" />
@@ -30,10 +28,10 @@ export const UserAccessEdit = props => (
     <Edit {...props}>
         <SimpleForm>
         <ReferenceInput label="users" source="userId" reference="users">
-                <SelectInput optionText="username" />
+            <SelectInput optionText="username" />
             </ReferenceInput>
             <ReferenceInput label="Company" source="companyId" reference="company">
-                <SelectInput optionText="name" />
+            <SelectInput optionText="name" />
             </ReferenceInput>
             <SelectInput  source="role" choices={choices} translateChoice={false}/> 
             <BooleanInput  source="isActive" />

@@ -53,7 +53,7 @@ namespace StockManagement.API
         public ActionResult<Product> Post([FromBody] Product product)
         {
             product.CreatedAt = DateTime.Now;
-            product.CreatedBy = "shahin";
+            product.CreatedBy = User.Identity.Name;
             _context.Products.Add(product);
             _context.SaveChanges();
             return product;

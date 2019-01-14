@@ -14,7 +14,6 @@ export const ProductList = (props) => (
     </List>
 );
 
-
 export const ProductFilter = (props) => (
     <Filter {...props}>
           <ReferenceInput label="Select Company" source="companyId" reference="company" alwaysOn >
@@ -30,8 +29,7 @@ export const ProductEdit = props => (
             <TextInput source="name" />
             <ReferenceInput label="Company" source="companyId" reference="company">
                 <SelectInput optionText="name" />
-            </ReferenceInput> 
-         
+            </ReferenceInput>          
         </SimpleForm>
     </Edit>
 );
@@ -42,9 +40,7 @@ export const ProductCreate = props => (
             <TextInput source="name" />            
             <ReferenceInput label="Company" source="companyId" reference="company">
                 <SelectInput optionText="name" />
-            </ReferenceInput>  
-            <DateInput source="createdAt" />
-            <TextInput source="createdBy" />
+            </ReferenceInput>             
         </SimpleForm>
     </Create>
 );

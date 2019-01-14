@@ -24,7 +24,6 @@ export const TransactionList = (props) => (
     </List>
 );
 
-
 export const TransactionFilter = (props) => (
     <Filter {...props}>
           <ReferenceInput label="Select Company" source="companyId" reference="company" alwaysOn >
@@ -36,9 +35,12 @@ export const TransactionFilter = (props) => (
 export const TransactionEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-        <TextField source="id" />
-            <TextInput source="name" />
-            <DateInput source="createdAt" />
+        <SelectInput source="type" choices={choices} translateChoice={false}/>
+            <NumberInput source="quantity" /> 
+            <NumberInput source="amount" /> 
+            <ReferenceInput label="Product" source="productId" reference="product">
+                <SelectInput optionText="name" />
+            </ReferenceInput>  
         </SimpleForm>
     </Edit>
 );
@@ -52,10 +54,7 @@ export const TransactionCreate = props => (
             <NumberInput source="amount" /> 
             <ReferenceInput label="Product" source="productId" reference="product">
                 <SelectInput optionText="name" />
-            </ReferenceInput>  
-        <TextInput source="createdBy"/>
-
-         <DateInput source="createdAt" />
+            </ReferenceInput>        
         </SimpleForm>
     </Create>
 );

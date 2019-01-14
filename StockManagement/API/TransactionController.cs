@@ -68,7 +68,7 @@ namespace StockManagement.API
                 }
 
                 transaction.CreatedAt = DateTime.Now;
-                transaction.CreatedBy = "shahin";
+                transaction.CreatedBy = User.Identity.Name;
                 _context.Transactions.Add(transaction);
 
                 if (balance == null)

@@ -6,5 +6,6 @@ namespace StockManagement.Dtos
     {
         public int CompanyId { get; set; }
         public AccessRight Role { get; set; }
+        public bool DefaultCompany { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, SelectField,Datagrid,ReferenceField, Edit, TextField ,EditButton,SimpleForm,SelectInput,Create, DateInput,ReferenceInput,BooleanInput  } from 'react-admin';
+import { BooleanField ,List, SelectField,Datagrid,ReferenceField, Edit, TextField ,EditButton,SimpleForm,SelectInput,Create, DateInput,ReferenceInput,BooleanInput  } from 'react-admin';
 
 const choices = [
     { id: 1, name: 'Admin' },
@@ -18,7 +18,10 @@ export const UserAccessList = (props) => (
             </ReferenceField>
 
             <SelectField  source="role" choices={choices} translateChoice={false}/>
+            <BooleanField   source="isActive" />
+            <BooleanField   source="defaultCompany" />
             <EditButton />
+            
         </Datagrid>
     </List>
 );

@@ -1,9 +1,9 @@
 import React from 'react';
-import { List, Datagrid,ReferenceField, TextField ,EditButton,Edit,SimpleForm,SelectInput,Create, TextInput,DateInput,NumberInput,ReferenceInput  } from 'react-admin';
+import { Filter,List, Datagrid,ReferenceField, TextField ,EditButton,Edit,SimpleForm,SelectInput,Create, TextInput,DateInput,NumberInput,ReferenceInput  } from 'react-admin';
 
 
 export const ProductList = (props) => (
-    <List {...props}>
+    <List {...props} filters={<ProductFilter />}>
         <Datagrid>           
             <TextField source="name" />
             <ReferenceField label="Company" source="companyId" reference="company">
@@ -14,6 +14,14 @@ export const ProductList = (props) => (
     </List>
 );
 
+
+export const ProductFilter = (props) => (
+    <Filter {...props}>
+          <ReferenceInput label="Select Company" source="companyId" reference="company" alwaysOn >
+                <SelectInput optionText="name" />
+            </ReferenceInput>  
+    </Filter>
+);
 
 export const ProductEdit = props => (
     <Edit {...props}>

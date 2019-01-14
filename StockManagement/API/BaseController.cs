@@ -21,7 +21,9 @@ namespace StockManagement.API
             return result.Select(x => new MyAccessRight
             {
                 CompanyId = x.CompanyId,
-                Role = x.Role
+                Role = x.Role,
+                DefaultCompany = x.DefaultCompany                
+
             }).ToList();
         }
 

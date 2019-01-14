@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid,SelectInput,SelectField , TextField,EditButton,Edit,SimpleForm,Create,DateInput,TextInput,NumberInput,ReferenceField,ReferenceInput } from 'react-admin';
+import { DateField ,Filter,List, Datagrid,SelectInput,SelectField , TextField,EditButton,Edit,SimpleForm,Create,DateInput,TextInput,NumberInput,ReferenceField,ReferenceInput } from 'react-admin';
 
 
 const choices = [
@@ -8,21 +8,30 @@ const choices = [
  ];
 
 export const TransactionList = (props) => (
-    <List title="All Transactions" {...props}>
+    <List title="All Transactions" {...props} filters={<TransactionFilter />} >
         <Datagrid rowClick="edit">
             
             <ReferenceField label="Product" source="productId" reference="product">
                 <TextField source="name" />
-            </ReferenceField>
+            </ReferenceField>          
+
             <SelectField  source="type" choices={choices} translateChoice={false}/>
             <TextField source="quantity" /> 
             <TextField source="amount" /> 
-            <TextField source="createdAt" /> 
+            <DateField  source="createdAt" /> 
            
         </Datagrid>
     </List>
 );
 
+
+export const TransactionFilter = (props) => (
+    <Filter {...props}>
+          <ReferenceInput label="Select Company" source="companyId" reference="company" alwaysOn >
+                <SelectInput optionText="name" />
+            </ReferenceInput>  
+    </Filter>
+);
 
 export const TransactionEdit = props => (
     <Edit {...props}>

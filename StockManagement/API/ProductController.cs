@@ -21,10 +21,15 @@ namespace StockManagement.API
 
         // GET: api/Product
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IEnumerable<Product> Get(int? companyId)
         {
-            var result = _context.Products.Where(x => GetMyAccessRights().Select(z => z.CompanyId)
-                    .Contains(x.CompanyId)).OrderByDescending(x => x.Id);
+            if(companyId == null)
+            {
+                companyId = GetMyAccessRights().FirstOrDefault(x => x.DefaultCompany).CompanyId;
+            }
+
+            var result = _context.Products.Where( x => GetMyAccessRights().Select(z => z.CompanyId)
+                    .Contains(x.CompanyId) && x.CompanyId == companyId).OrderByDescending(x => x.Id);
             Request.HttpContext.Response.Headers["X-Total-Count"] = result.ToList()?.Count.ToString();
             Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
             return result;

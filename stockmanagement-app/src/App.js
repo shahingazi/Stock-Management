@@ -36,11 +36,11 @@ const httpClient = (url, options = {}) => {
 const dataProvider = jsonServerProvider('http://localhost:8050/api/', httpClient);
 const App = () => (
   <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} locale="sv" messages={messages}>
-      <Resource name="product" list={ProductList} edit={ProductEdit} create ={ProductCreate}  icon={Store}/> 
-      <Resource name="users" list={UsersList}  edit={UserEdit} create={UserCreate}   icon={UserIcon}/> 
-      <Resource name="company" list={CompanyList}  edit={CompanyEdit} create={CompanyCreate}  icon={Business}  /> 
+      <Resource name="product" list={ProductList} edit={ProductEdit} create ={ProductCreate}  icon={Store}/>       
       <Resource name="transaction" list={TransactionList}  edit={TransactionEdit} create={TransactionCreate}  icon={ShoppingBasket}  />        
       <Resource name="balance" list={BalanceList}  icon={AccountBalanceWallet} />  
+      <Resource name="users" list={UsersList}  edit={UserEdit} create={UserCreate}   icon={UserIcon}/> 
+      <Resource name="company" list={CompanyList}  edit={CompanyEdit} create={CompanyCreate}  icon={Business}  /> 
       <Resource name="UserAccess" list={UserAccessList} create={UserAccessCreate} edit={UserAccessEdit} icon={AccessRight}  />  
   </Admin>
 );

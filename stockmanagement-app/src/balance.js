@@ -16,12 +16,11 @@ export const BalanceList = (props) => (
     </List>
 );
 
-
 export const BalanceFilter = (props) => (
     <Filter {...props}>
-          <ReferenceInput label="Select Company" source="companyId" reference="company" alwaysOn >
-                <SelectInput optionText="name" />
-            </ReferenceInput>  
+        <ReferenceInput label="Select Company" source="companyId" reference="company" alwaysOn >
+             <SelectInput optionText="name" />
+        </ReferenceInput>  
     </Filter>
 );
 

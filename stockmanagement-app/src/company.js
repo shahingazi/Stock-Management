@@ -1,5 +1,5 @@
 import React from 'react';
-import { List,DateField, Datagrid, TextField,EditButton,Edit,SimpleForm,Create,DateInput,TextInput } from 'react-admin';
+import { List,Datagrid, TextField,EditButton,Edit,SimpleForm,Create,TextInput } from 'react-admin';
 
 export const CompanyList = (props) => (
     <List title="All companies" {...props}>
@@ -15,8 +15,7 @@ export const CompanyEdit = props => (
     <Edit {...props}>
         <SimpleForm>
         <TextField source="id" />
-            <TextInput source="name" />
-            
+            <TextInput source="name" />            
         </SimpleForm>
     </Edit>
 );
@@ -24,7 +23,7 @@ export const CompanyEdit = props => (
 export const CompanyCreate = props => (
     <Create {...props} redirect="show">
         <SimpleForm  >
-         <TextInput source="name" />        
+            <TextInput source="name" />        
         </SimpleForm>
     </Create>
 );

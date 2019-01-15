@@ -15,15 +15,7 @@ import AccountBalanceWallet from '@material-ui/icons/AccountBalance';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
-import englishMessages from 'ra-language-english';
-import swedishMessages from 'aor-language-swedish';
 
-
-const messages = {
- 
-  'sv': swedishMessages,
-};
-const i18nProvider = locale => messages[locale];
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
       options.headers = new Headers({ Accept: 'application/json' });
@@ -34,8 +26,9 @@ const httpClient = (url, options = {}) => {
 }
 
 const dataProvider = jsonServerProvider('http://localhost:8050/api/', httpClient);
+
 const App = () => (
-  <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} locale="sv" messages={messages}>
+  <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider}  >
       <Resource name="product" list={ProductList} edit={ProductEdit} create ={ProductCreate}  icon={Store}/>       
       <Resource name="transaction" list={TransactionList}  edit={TransactionEdit} create={TransactionCreate}  icon={ShoppingBasket}  />        
       <Resource name="balance" list={BalanceList}  icon={AccountBalanceWallet} />  
@@ -44,5 +37,4 @@ const App = () => (
       <Resource name="UserAccess" list={UserAccessList} create={UserAccessCreate} edit={UserAccessEdit} icon={AccessRight}  />  
   </Admin>
 );
-
 export default App;

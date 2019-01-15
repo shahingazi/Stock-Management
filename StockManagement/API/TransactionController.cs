@@ -23,7 +23,6 @@ namespace StockManagement.API
         [HttpGet]
         public IEnumerable<Transaction> Get(int ? companyId)
         {
-
             if (companyId == null)
             {
                 companyId = GetMyAccessRights().FirstOrDefault(x => x.DefaultCompany).CompanyId;

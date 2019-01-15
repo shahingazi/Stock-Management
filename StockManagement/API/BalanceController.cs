@@ -22,9 +22,21 @@ namespace StockManagement.API
         [HttpGet]
         public IEnumerable<Balance> Get(int ? companyId)
         {
+
+            var myrights = GetMyAccessRights();
+
             if (companyId == null)
             {
-                companyId = GetMyAccessRights().FirstOrDefault(x => x.DefaultCompany).CompanyId;
+                companyId = myrights.FirstOrDefault(x => x.DefaultCompany).CompanyId;
+            }
+
+            var myrole = myrights.FirstOrDefault(x => x.CompanyId == companyId).Role;
+
+            if (myrole == AccessRight.Contributor)
+            {
+                Request.HttpContext.Response.Headers["X-Total-Count"] = "0";
+                Request.HttpContext.Response.Headers["Access-Control-Expose-Headers"] = "X-Total-Count";
+                return new List<Balance>();
             }
 
             var result = _context.Balances.Where(x => GetMyAccessRights().Select(z => z.CompanyId)

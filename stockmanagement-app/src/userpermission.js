@@ -12,10 +12,10 @@ const choices = [
 export const UserAccessList = (props) => (
      <List {...props} >
          <Datagrid>           
-             <ReferenceField label="UserName" source="userId" reference="users">
+             <ReferenceField label="ব্যবহারকারী" source="userId" reference="users">
                  <TextField source="username" />
              </ReferenceField>
-             <ReferenceField label="Company" source="companyId" reference="company">
+             <ReferenceField label="কোম্পানির" source="companyId" reference="company">
                  <TextField source="name" />
              </ReferenceField>
              <SelectField  source="role" choices={choices} translateChoice={false}/>
@@ -29,10 +29,10 @@ export const UserAccessList = (props) => (
 export const UserAccessEdit = props => (
      <Edit {...props}>
          <SimpleForm>
-             <ReferenceInput label="users" source="userId" reference="users">
+             <ReferenceInput label="ব্যবহারকারী" source="userId" reference="users">
                  <SelectInput optionText="username" />
              </ReferenceInput>
-             <ReferenceInput label="Company" source="companyId" reference="company">
+             <ReferenceInput label="কোম্পানির" source="companyId" reference="company">
                  <SelectInput optionText="name" />
              </ReferenceInput>
              <SelectInput  source="role" choices={choices} translateChoice={false}/> 
@@ -45,14 +45,14 @@ export const UserAccessEdit = props => (
 export const UserAccessCreate = props => (
      <Create {...props}>
          <SimpleForm> 
-             <ReferenceInput label="users" source="userId" reference="users">
+             <ReferenceInput label="ব্যবহারকারী" source="userId" reference="users">
                  <SelectInput optionText="username" />
              </ReferenceInput>
-             <ReferenceInput label="Company" source="companyId" reference="company">
+             <ReferenceInput label="কোম্পানির" source="companyId" reference="company">
                  <SelectInput optionText="name" />
              </ReferenceInput>
              <SelectInput  source="role" choices={choices} translateChoice={false}/>           
-             <DateInput source="createdAt" />
+           
              <BooleanInput  source="isActive" />
              <BooleanInput  source="defaultCompany" />
          </SimpleForm>

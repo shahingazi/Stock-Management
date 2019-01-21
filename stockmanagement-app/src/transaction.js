@@ -2,14 +2,14 @@ import React from 'react';
 import { DateField ,Filter,List, Datagrid,SelectInput,SelectField , TextField,Edit,SimpleForm,Create,NumberInput,ReferenceField,ReferenceInput } from 'react-admin';
 
 const choices = [
-    { id: 1, name: 'Buy' },
-    { id: 2, name: 'Sell' },
+    { id: 1, name: 'ক্রয়' },
+    { id: 2, name: 'বিক্রয়' },
  ];
 
 export const TransactionList = (props) => (
-     <List title="All Transactions" {...props} filters={<TransactionFilter />} >
+     <List  {...props} filters={<TransactionFilter />} >
          <Datagrid rowClick="edit">            
-             <ReferenceField label="Product" source="productId" reference="product">
+             <ReferenceField label="প্রোডাক্ট" source="productId" reference="product" allowEmpty="true" >
                  <TextField source="name" />
              </ReferenceField>
              <SelectField  source="type" choices={choices} translateChoice={false}/>
@@ -34,7 +34,7 @@ export const TransactionEdit = props => (
              <SelectInput source="type" choices={choices} translateChoice={false}/>
              <NumberInput source="quantity" /> 
              <NumberInput source="amount" /> 
-             <ReferenceInput label="Product" source="productId" reference="product">
+             <ReferenceInput label="প্রোডাক্ট" source="productId" reference="product">
                  <SelectInput optionText="name" />
              </ReferenceInput>  
          </SimpleForm>
@@ -48,7 +48,7 @@ export const TransactionCreate = props => (
              <SelectInput source="type" choices={choices} translateChoice={false}/>
              <NumberInput source="quantity" /> 
              <NumberInput source="amount" /> 
-             <ReferenceInput label="Product" source="productId" reference="product">
+             <ReferenceInput label="প্রোডাক্ট" source="productId" reference="product">
                  <SelectInput optionText="name" />
              </ReferenceInput>        
          </SimpleForm>
